@@ -2,7 +2,7 @@ import rateLimit from "express-rate-limit";
 
 export const RateLimit = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 20, // máximo 20 requests por ventana
+  max: 100, // máximo 100 requests por ventana
   message: {
     message: "Too many requests from this IP, please try again later.",
   },

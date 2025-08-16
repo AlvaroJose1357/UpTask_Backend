@@ -17,7 +17,8 @@ app.use(helmet()); // Middleware para mejorar la seguridad de la aplicación
 app.use(morgan("dev")); // Middleware para registrar las solicitudes HTTP
 app.use(cors(corsOptions)); // Middleware para manejar CORS con opciones personalizadas
 
-app.get("/", (req, res) => {
+// ruta para probar
+app.get("/", cors({ origin: true }), (req, res) => {
   res.send("Hello World!");
 });
 
@@ -30,11 +31,12 @@ app.get(`/api/${API_VERSION}`, (req, res) => {
 // Ruta para la documentación de la API usando Swagger
 app.use(
   "/docs",
+  cors({ origin: true }), // Permitir CORS para la documentación
   swaggerUi.serve,
   swaggerUi.setup(swaggerSpec, swaggerUIOptions),
 );
 
-app.use("*", (req, res) => {
+app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found" });
   WarningLogger(`Ruta no encontrada: `, {
     method: req.method,
