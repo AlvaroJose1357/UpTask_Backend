@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    //* Configuración de salida
+    "outDir": "./dist", // donde se compila el proyecto ya en produccion
+    "rootDir": "./src", // donde se encuentra el codigo fuente
+    //* Target y módulos
+    "lib": ["ESNext"], // ultima version de javascript que se puede usar, puedes cambiar a "ES2022" o "ES2020" si lo necesitas
+    "target": "ESNext", // ESNext es la ultima version de javascript y de typescript, pasarlo a "ES2022" o "ES2020" si lo necesitas
+    "moduleResolution": "NodeNext", // resolucion de modulos de node, puedes cambiar a "Node" si lo necesitas
+    "module": "NodeNext", // tipo de modulo que se va a usar, modulos de node para importar y exportar, y como se compilan, puedes cambiar a "CommonJS" si lo necesitas
+    //* Type checking
+    "strict": true, // habilita todas las comprobaciones estrictas de tipo,
+    //* Configuración de desarrollo
+    "sourceMap": true, // genera archivos .map para depuración
+    "removeComments": false, // elimina los comentarios del codigo compilado,
+    "declaration": true, // crea un archivo de definicion de tipos
+    //* Interoperabilidad y compatibilidad
+    "esModuleInterop": true, // habilita la interoperabilidad con módulos ES, permite importar modulos de commonjs en ESmacript sin problemas
+    "forceConsistentCasingInFileNames": true, // fuerza el uso de mayusculas y minusculas en los nombres de los archivos
+    "baseUrl": ".", // base para las rutas relativas
+    "paths": {
+      "@/*": ["src/*"] // permite usar rutas relativas desde la carpeta src, puedes cambiar a "src/*" si lo necesitas
+    },
+    // las siguientes extensiones son para que se puedan usar los decoradores
+    "experimentalDecorators": true, // habilita el uso de decoradores
+    "emitDecoratorMetadata": true // emite metadatos de decoradores, necesario para TypeORM y otros frameworks que usan decoradores
+  },
+  "include": ["src/**/*.ts"], // incluye todos los archivos .ts en la carpeta src que se compilarán
+  "exclude": ["node_modules", "src/**/*.test.ts"] // excluye la carpeta node_modules y los archivos de prueba que no se deben compilar
+}

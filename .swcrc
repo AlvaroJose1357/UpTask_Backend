@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json.schemastore.org/swcrc",
+  "jsc": {
+    "parser": {
+      // Puedes cambiar "typescript" a "ecmascript" si no necesitas TypeScript
+      // o "babel" si prefieres usar Babel como parser.
+      "syntax": "typescript",
+      // Cambia a true si necesitas soporte para JSX/TSX
+      "tsx": false,
+      // Cambia a false si no necesitas soporte para importaciones dinámicas
+      "dynamicImport": true,
+      // Cambia a false si no necesitas decoradores
+      "decorators": true
+    },
+
+    "transform": {
+      // Cambia a false si no necesitas metadatos de decoradores
+      // (por ejemplo, si no estás usando TypeORM o decoradores de clase)
+      "legacyDecorator": true,
+      // Cambia a false si no necesitas metadatos de decoradores
+      "decoratorMetadata": true
+    },
+    // Cambia a "es2022" o "esnext" si necesitas características más recientes de ECMAScript
+    // o si estás apuntando a un entorno que lo soporte.
+    "target": "esnext",
+    // Cambia a true si quieres que el código sea más compacto y menos legible
+    // (útil para producción).
+    "loose": false,
+    // Cambia a true si quieres usar helpers externos de Babel
+    "externalHelpers": false,
+    // Cambia a true si quieres mantener los nombres de las clases
+    "keepClassNames": false
+  },
+  "module": {
+    // Cambia a la version de módulo que necesites, como "commonjs" o "es6"
+    "type": "commonjs",
+    // Cambia a true si quieres que el módulo sea estricto
+    // (esto puede afectar la interoperabilidad con otros módulos).
+    "strict": false,
+    // Cambia a true si quieres que el módulo sea estricto en cuanto a la interoperabilidad
+    // (esto puede afectar la forma en que se importan/exportan los módulos).
+    "strictMode": false,
+    // Cambia a true si quieres que no haya interoperabilidad con módulos CommonJS
+    // (esto puede afectar la forma en que se importan/exportan los módulos).
+    "noInterop": false,
+    // Cambia a true si quieres que los módulos se carguen de forma perezosa
+    // (esto puede afectar el rendimiento en algunos casos).
+    "lazy": false
+  },
+  // Cambia a true si quieres que el código sea más compacto y menos legible
+  "minify": false
+}
+
+// por si necesitas utilizar TypeOrm, decoradores, etc.
+// {
+//   "$schema": "https://json.schemastore.org/swcrc",
+//   "jsc": {
+//     "parser": {
+//       "syntax": "typescript",
+//       "tsx": false,
+//       "dynamicImport": true,
+//       "decorators": false
+//     },
+//     "transform": {
+//       "decoratorMetadata": true
+//     },
+//     "target": "es2022",
+//     "loose": false,
+//     "externalHelpers": false,
+//     "keepClassNames": false
+//   },
+//   "module": {
+//     "type": "commonjs",
+//     "strict": false,
+//     "strictMode": false,
+//     "noInterop": false,
+//     "lazy": false
+//   },
+//   "minify": true
+// }

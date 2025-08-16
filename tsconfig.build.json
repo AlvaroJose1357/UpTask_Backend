@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "removeComments": true,
+    "sourceMap": false
+  },
+  "exclude": ["**/*.test.ts", "**/*.spec.ts", "**/__mocks__/**"]
+}
+
+// en el build colocar el siguiente comando: tsc --project tsconfig.build.json
