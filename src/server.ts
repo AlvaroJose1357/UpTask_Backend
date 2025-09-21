@@ -8,6 +8,7 @@ import { RateLimit } from "@/utils/rateLimit";
 import swaggerSpec, { swaggerUIOptions } from "@/config/Swagger";
 import { API_VERSION } from "./config/Process";
 import { WarningLogger } from "./utils/logger";
+import { connectDB } from "./config/BD";
 
 const app: Express = express();
 
@@ -16,6 +17,9 @@ app.use(RateLimit); // Middleware para limitar la tasa de solicitudes
 app.use(helmet()); // Middleware para mejorar la seguridad de la aplicación
 app.use(morgan("dev")); // Middleware para registrar las solicitudes HTTP
 app.use(cors(corsOptions)); // Middleware para manejar CORS con opciones personalizadas
+
+// Conexión a la base de datos
+connectDB();
 
 // ruta para probar
 app.get("/", cors({ origin: true }), (req, res) => {
