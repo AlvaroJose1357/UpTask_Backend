@@ -1,4 +1,4 @@
-import express, { Express } from "express";
+import express, { Express, Request, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
@@ -7,8 +7,9 @@ import { corsOptions } from "@/config/Cors";
 import { RateLimit } from "@/utils/rateLimit";
 import swaggerSpec, { swaggerUIOptions } from "@/config/Swagger";
 import { API_VERSION } from "./config/Process";
-import { WarningLogger } from "./utils/logger";
+import { InfoLogger, WarningLogger } from "./utils/logger";
 import { connectDB } from "./config/BD";
+import proyectRouter from "./routes/proyectRouter";
 
 const app: Express = express();
 
@@ -21,16 +22,12 @@ app.use(cors(corsOptions)); // Middleware para manejar CORS con opciones persona
 // Conexión a la base de datos
 connectDB();
 
-// ruta para probar
-app.get("/", cors({ origin: true }), (req, res) => {
-  res.send("Hello World!");
-});
-
-// Ruta de ejemplo para la API
-app.get(`/api/${API_VERSION}`, (req, res) => {
-  res.json({ message: "API con express y typescript" });
-});
+// // Ruta de ejemplo para la API
+// app.get(`/api/${API_VERSION}`, (req, res) => {
+//   res.json({ message: "API con express y typescript" });
+// });
 //? las rutas de la API deberían estar bajo el prefijo /api/{API_VERSION}/ -> el donde apuntan
+app.use(`/api/${API_VERSION}/projects`, proyectRouter);
 
 // Ruta para la documentación de la API usando Swagger
 app.use(
@@ -40,12 +37,39 @@ app.use(
   swaggerUi.setup(swaggerSpec, swaggerUIOptions),
 );
 
-app.use((req, res) => {
-  res.status(404).json({ success: false, message: "Route not found" });
+// Middleware para rutas no encontradas
+app.use((req: Request, res: Response) => {
+  res.status(404).json({
+    mensaje: "No se encontró la ruta solicitada",
+    success: false,
+  });
   WarningLogger(`Ruta no encontrada: `, {
     method: req.method,
     url: req.url,
   });
+});
+
+// Manejo de errores
+app.use((error: Error, req: Request, res: Response) => {
+  console.error(error.stack);
+  res.status(500).json({
+    mensaje: "Algo salió mal en el servidor",
+    success: false,
+    error: error.message,
+  });
+  WarningLogger(`El Servidor ha tenido un fallo`, {
+    method: req.method,
+    url: req.url,
+  });
+});
+
+process.on("SIGINT", () => {
+  InfoLogger("🛑 SIGINT recibido, cerrando servidor...");
+  process.exit(0);
+});
+process.on("SIGTERM", () => {
+  InfoLogger("🛑 SIGTERM recibido, cerrando servidor...");
+  process.exit(0);
 });
 
 export default app;
