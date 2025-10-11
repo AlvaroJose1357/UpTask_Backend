@@ -62,7 +62,7 @@ export class ProjectController {
         return;
       }
       await project.deleteOne();
-      res.status(204).json("");
+      res.status(200).send("Proyecto eliminado correctamente");
     } catch (error) {
       ErrorLogger("Error deleting project", { error });
       res.status(500).send("Error eliminando proyecto");
