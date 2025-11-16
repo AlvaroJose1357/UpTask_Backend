@@ -1,11 +1,11 @@
 import app from "./server";
 import { PORT } from "./config/Process";
-import { InfoLogger } from "./utils/logger";
+import logger from "./utils/logger";
 
 app.listen(PORT, () => {
-  InfoLogger(`🚀 Server running on port ${PORT}`);
-  InfoLogger(`📚 API Documentation: http://localhost:${PORT}/docs`);
-  InfoLogger(
+  logger.info(`🚀 Server running on port ${PORT}`);
+  logger.info(`📚 API Documentation: http://localhost:${PORT}/docs`);
+  logger.info(
     `✅ El servicio está listo para recibir peticiones en http://localhost:${PORT}`,
   );
 });

@@ -1,5 +1,5 @@
 import Project from "@/models/Project";
-import { ErrorLogger } from "@/utils/logger";
+import logger from "@/utils/logger";
 import type { Request, Response } from "express";
 export class ProjectController {
   static createProject = async (req: Request, res: Response) => {
@@ -8,7 +8,7 @@ export class ProjectController {
       await project.save();
       res.status(201).send("Projecto creado correctamente");
     } catch (error) {
-      ErrorLogger("Error creating project", { error });
+      logger.error("Error creating project", { error });
       res.status(500).send("Error creando proyecto");
     }
   };
@@ -17,7 +17,7 @@ export class ProjectController {
       const projects = await Project.find();
       res.status(200).json({ message: "Proyectos obtenidos", projects });
     } catch (error) {
-      ErrorLogger("Error fetching projects", { error });
+      logger.error("Error fetching projects", { error });
       res.status(500).send("Error obteniendo proyectos");
     }
   };
@@ -32,7 +32,7 @@ export class ProjectController {
       }
       res.status(200).json({ message: "Proyecto obtenido", project });
     } catch (error) {
-      ErrorLogger("Error fetching project by ID", { error });
+      logger.error("Error fetching project by ID", { error });
       res.status(500).send("Error obteniendo proyecto por ID");
     }
   };
@@ -48,7 +48,7 @@ export class ProjectController {
       await project.save();
       res.status(200).send("Proyecto actualizado correctamente");
     } catch (error) {
-      ErrorLogger("Error updating project", { error });
+      logger.error("Error updating project", { error });
       res.status(500).send("Error actualizando proyecto");
     }
   };
@@ -64,7 +64,7 @@ export class ProjectController {
       await project.deleteOne();
       res.status(200).send("Proyecto eliminado correctamente");
     } catch (error) {
-      ErrorLogger("Error deleting project", { error });
+      logger.error("Error deleting project", { error });
       res.status(500).send("Error eliminando proyecto");
     }
   };

@@ -8,7 +8,7 @@
 // export const { PORT = 3000, FRONTEND_URL } = process.env;
 // -------------------------------------------------------------------
 // configuracion TOP
-import { ErrorLogger } from "@/utils/logger";
+import logger from "@/utils/logger";
 import { z } from "zod";
 process.loadEnvFile();
 const envSchema = z.object({
@@ -31,7 +31,7 @@ if (!success) {
   // Si la validación falla, se registra un error y se termina el proceso
   // Se usa z.prettifyError para formatear el error de validación en un formato legible
   // se podria usar z.treeifyError para un formato mas detallado y usado en el caso de que se necesite ver la estructura del error y se necesite acceder a los detalles de cada error
-  ErrorLogger(" ❌ Error en las variables de entorno", z.prettifyError(error));
+  logger.error(" ❌ Error en las variables de entorno", z.prettifyError(error));
   process.exit(1); // Termina el proceso si hay un error en las variables de entorno
 }
 

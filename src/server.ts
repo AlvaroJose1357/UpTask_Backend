@@ -7,9 +7,9 @@ import { corsOptions } from "@/config/Cors";
 import { RateLimit } from "@/utils/rateLimit";
 import swaggerSpec, { swaggerUIOptions } from "@/config/Swagger";
 import { API_VERSION } from "./config/Process";
-import { InfoLogger, WarningLogger } from "./utils/logger";
+import logger from "./utils/logger";
 import { connectDB } from "./config/BD";
-import proyectRouter from "./routes/proyectRouter";
+import proyectRouter from "./routes/projectRouter";
 
 const app: Express = express();
 
@@ -43,7 +43,7 @@ app.use((req: Request, res: Response) => {
     mensaje: "No se encontró la ruta solicitada",
     success: false,
   });
-  WarningLogger(`Ruta no encontrada: `, {
+  logger.warning(`Ruta no encontrada: `, {
     method: req.method,
     url: req.url,
   });
@@ -57,18 +57,18 @@ app.use((error: Error, req: Request, res: Response) => {
     success: false,
     error: error.message,
   });
-  WarningLogger(`El Servidor ha tenido un fallo`, {
+  logger.error(`El Servidor ha tenido un fallo`, {
     method: req.method,
     url: req.url,
   });
 });
 
 process.on("SIGINT", () => {
-  InfoLogger("🛑 SIGINT recibido, cerrando servidor...");
+  logger.info("🛑 SIGINT recibido, cerrando servidor...");
   process.exit(0);
 });
 process.on("SIGTERM", () => {
-  InfoLogger("🛑 SIGTERM recibido, cerrando servidor...");
+  logger.info("🛑 SIGTERM recibido, cerrando servidor...");
   process.exit(0);
 });
 
