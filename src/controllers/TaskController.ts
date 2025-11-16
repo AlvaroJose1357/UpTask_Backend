@@ -1,12 +1,18 @@
-import { ErrorLogger } from "@/utils/logger";
+import Project from "@/models/Project";
+import logger from "@/utils/logger";
 import type { Request, Response } from "express";
 
 export class TaskController {
-  static createTask(req: Request, res: Response) {
+  static async createTask(req: Request, res: Response) {
+    const { projectId } = req.params;
     try {
-      // Logic to create a task
+      const project = await Project.findById(projectId);
+      if (!project) {
+        res.status(404).json({ message: "Project not found" });
+        return;
+      }
     } catch (error) {
-      ErrorLogger("Error creating task", { error });
+      logger.error("Error creating task", { error });
       res.status(500).send("Error creando tarea");
     }
   }
@@ -14,7 +20,7 @@ export class TaskController {
     try {
       // Logic to get all tasks
     } catch (error) {
-      ErrorLogger("Error getting all tasks", { error });
+      logger.error("Error getting all tasks", { error });
       res.status(500).send("Error obteniendo todas las tareas");
     }
   }
@@ -22,7 +28,7 @@ export class TaskController {
     try {
       // Logic to get a task by ID
     } catch (error) {
-      ErrorLogger("Error getting task by ID", { error });
+      logger.error("Error getting task by ID", { error });
       res.status(500).send("Error obteniendo tarea");
     }
   }
@@ -30,7 +36,7 @@ export class TaskController {
     try {
       // Logic to update a task
     } catch (error) {
-      ErrorLogger("Error updating task", { error });
+      logger.error("Error updating task", { error });
       res.status(500).send("Error actualizando tarea");
     }
   }
@@ -38,7 +44,7 @@ export class TaskController {
     try {
       // Logic to delete a task
     } catch (error) {
-      ErrorLogger("Error deleting task", { error });
+      logger.error("Error deleting task", { error });
       res.status(500).send("Error eliminando tarea");
     }
   }
