@@ -16,15 +16,15 @@
     "declaration": true, // crea un archivo de definicion de tipos
     //* Interoperabilidad y compatibilidad
     "esModuleInterop": true, // habilita la interoperabilidad con módulos ES, permite importar modulos de commonjs en ESmacript sin problemas
-    "forceConsistentCasingInFileNames": true, // fuerza el uso de mayusculas y minusculas en los nombres de los archivos
-    "baseUrl": ".", // base para las rutas relativas
+    "forceConsistentCasingInFileNames": true,
+    // Configuración de rutas
     "paths": {
-      "@/*": ["src/*"] // permite usar rutas relativas desde la carpeta src, puedes cambiar a "src/*" si lo necesitas
+      "@/*": ["./src/*"] // permite usar rutas relativas desde la carpeta src, puedes cambiar a "src/*" si lo necesitas
     },
     // las siguientes extensiones son para que se puedan usar los decoradores
-    "experimentalDecorators": true, // habilita el uso de decoradores
-    "emitDecoratorMetadata": true // emite metadatos de decoradores, necesario para TypeORM y otros frameworks que usan decoradores
+    "experimentalDecorators": false, // habilita el uso de decoradores
+    "emitDecoratorMetadata": false // emite metadatos de decoradores, necesario para TypeORM y otros frameworks que usan decoradores
   },
   "include": ["src/**/*.ts"], // incluye todos los archivos .ts en la carpeta src que se compilarán
-  "exclude": ["node_modules", "src/**/*.test.ts"] // excluye la carpeta node_modules y los archivos de prueba que no se deben compilar
+  "exclude": ["node_modules", "dist", "**/*.test.ts"] // excluye la carpeta node_modules y los archivos de prueba que no se deben compilar
 }
