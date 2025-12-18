@@ -8,8 +8,7 @@ export class TaskController {
       const taskData = new Task(req.body);
       taskData.project = req.project!.id;
       req.project!.tasks.push(taskData.id);
-      await taskData.save();
-      await req.project!.save();
+      await Promise.allSettled([taskData.save(), req.project!.save()]);
       logger.success("Task created successfully");
       res.status(201).json({ message: "Tarea creada exitosamente", taskData });
     } catch (error) {
