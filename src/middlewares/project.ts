@@ -1,10 +1,10 @@
-import type { Request, Response, NextFunction } from "express";
-import Project, { IProject } from "@/models/Project";
+import type { NextFunction, Request, Response } from "express";
+import Project, { type IProject } from "@/models/Project";
 
 // se extiende la interfaz Request para incluir la propiedad project
 declare module "express" {
   interface Request {
-    project?: IProject; // propiedad opcional para almacenar el proyecto, esto con el fin de tipar correctamente, ya que express no lo tiene por defecto, y arroja errores en las rutas
+    project?: IProject; // middleware `validateProjectExists` garantiza que esta propiedad existe antes de llegar al controller
   }
 }
 

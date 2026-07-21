@@ -1,15 +1,15 @@
-import express, { Express, Request, Response } from "express";
+import cors from "cors";
+import express, { type Express, type Request, type Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
-import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import { corsOptions } from "@/config/Cors";
-import { RateLimit } from "@/utils/rateLimit";
 import swaggerSpec, { swaggerUIOptions } from "@/config/Swagger";
-import { API_VERSION } from "./config/Process";
-import logger from "./utils/logger";
+import { RateLimit } from "@/utils/rateLimit";
 import { connectDB } from "./config/BD";
+import { API_VERSION } from "./config/Process";
 import proyectRouter from "./routes/projectRouter";
+import logger from "./utils/logger";
 
 const app: Express = express();
 
@@ -51,7 +51,7 @@ app.use((req: Request, res: Response) => {
 
 // Manejo de errores
 app.use((error: Error, req: Request, res: Response) => {
-  console.error(error.stack);
+  logger.error(error.stack ?? "Error desconocido");
   res.status(500).json({
     mensaje: "Algo salió mal en el servidor",
     success: false,

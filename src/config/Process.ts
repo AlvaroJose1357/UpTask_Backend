@@ -3,13 +3,14 @@
 // los iguales serian por si no se encuentra la variable de entorno, entonces por defecto se asigna el valor que contenga el lado derecho del igual
 // export const { PORT = 3000, POSTGRES_URL } = process.env;
 
+import { z } from "zod";
 // // Forma de uso antigua:
 // import "dotenv/config";
 // export const { PORT = 3000, FRONTEND_URL } = process.env;
 // -------------------------------------------------------------------
 // configuracion TOP
 import logger from "@/utils/logger";
-import { z } from "zod";
+
 process.loadEnvFile();
 const envSchema = z.object({
   PORT: z.string().default("3000"),

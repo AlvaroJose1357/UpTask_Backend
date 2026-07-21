@@ -1,4 +1,4 @@
-import { Schema, Document, model, Types } from "mongoose";
+import { type Document, model, Schema, type Types } from "mongoose";
 
 const taskStatus = {
   PENDING: "pending",

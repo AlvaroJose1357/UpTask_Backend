@@ -1,7 +1,7 @@
-import mongoose from "mongoose";
-import { MONGO_URI } from "./Process";
 import { exit } from "node:process";
+import mongoose from "mongoose";
 import logger from "@/utils/logger";
+import { MONGO_URI } from "./Process";
 
 let count = 2;
 export const connectDB = async () => {

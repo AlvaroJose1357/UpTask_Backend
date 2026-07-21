@@ -1,0 +1,13 @@
+packages:
+  - .
+
+allowBuilds:
+  "@scarf/scarf": false
+  bcrypt: false
+  esbuild: false
+  oxc-resolver: false
+
+minimumReleaseAge: 1440
+
+minimumReleaseAgeExclude:
+  - mongoose@9.8.0

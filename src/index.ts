@@ -1,5 +1,5 @@
-import app from "./server";
 import { PORT } from "./config/Process";
+import app from "./server";
 import logger from "./utils/logger";
 
 app.listen(PORT, () => {

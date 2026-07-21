@@ -1,6 +1,6 @@
+import type { Request, Response } from "express";
 import Project from "@/models/Project";
 import logger from "@/utils/logger";
-import type { Request, Response } from "express";
 export class ProjectController {
   static createProject = async (req: Request, res: Response) => {
     const project = new Project(req.body);
@@ -12,7 +12,7 @@ export class ProjectController {
       res.status(500).send("Error creando proyecto");
     }
   };
-  static getAllProjects = async (req: Request, res: Response) => {
+  static getAllProjects = async (_req: Request, res: Response) => {
     try {
       const projects = await Project.find();
       res.status(200).json({ message: "Proyectos obtenidos", projects });
