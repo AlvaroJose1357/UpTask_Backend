@@ -17,10 +17,12 @@ export class TaskController {
       res.status(500).send("Error creando tarea");
     }
   }
-  static getAllTasks(_req: Request, res: Response) {
+  static async getAllTasks(req: Request, res: Response) {
     try {
-      // Logic to get all tasks
-      res.status(200).json({ message: "Todas las tareas obtenidas" });
+      const tasks = await Task.find({ project: req.project?._id }).populate(
+        "project",
+      );
+      res.status(200).json({ message: "Todas las tareas obtenidas", tasks });
     } catch (error) {
       logger.error("Error getting all tasks", { error });
       res.status(500).send("Error obteniendo todas las tareas");

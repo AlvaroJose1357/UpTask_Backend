@@ -3,8 +3,8 @@
   "version": "1.2.1",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "dev:api": "tsx watch src/index.ts --api",
+    "dev": "tsx watch --clear-screen=false src/index.ts",
+    "dev:api": "tsx watch --clear-screen=false src/index.ts --api",
     "build": "tsc",
     "start": "node dist/src/index.js",
     "prepare": "husky",
