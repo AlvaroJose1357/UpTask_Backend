@@ -1,26 +1,18 @@
-export default {
+import type { UserConfig } from "@commitlint/types";
+
+const config: UserConfig = {
   extends: ["@commitlint/config-conventional"],
   rules: {
-    // Permitir scope opcional
     "scope-empty": [0],
-    // Asegurar que el tipo esté entre los válidos
     "type-enum": [
       2,
       "always",
-      [
-        "feat",
-        "fix",
-        "docs",
-        "style",
-        "refactor",
-        "perf",
-        "test",
-        "chore",
-        "revert",
-      ],
+      ["feat", "fix", "docs", "style", "refactor", "perf", "test", "chore", "revert"],
     ],
   },
 };
+
+export default config;
 // Este archivo de configuración de commitlint se utiliza para validar los mensajes de los commits
 /*¿Qué formatos acepta?
 Con esta configuración, commitlint permitirá:
